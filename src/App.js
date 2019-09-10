@@ -19,19 +19,21 @@ function App() {
   // Don't forget to pass the functions (and any additional data needed) to the components as props
 
   const [total, setTotal] = useState(0);
-  const [operation, setOperation] = useState([0]); // always have the operation array start with a 0 in case the user starts the operation with an operator and not a number
+  const [values, setValues] = useState([0]); // always have the operation array start with a 0 in case the user starts the operation with an operator and not a number
   const calculateTotal = arr => {
     // takes an array operation and returns a total result from the operation in the array.
   };
-  const handleClick = e => {
-    console.log('click');
+  const handleClick = value => {
+    console.log('click', value);
+    setValues([...values, value]);
   };
+  console.log(values);
   return (
     <div className='container'>
       <Logo />
       <div className='App'>
         {/* STEP 4 - Render your components here and be sure to properly import/export all files */}
-        <Display value={0} />
+        <Display values={values.slice(1)} />
         <section className='buttons-container'>
           <section className='specials'>
             <Specials handleClick={handleClick} />

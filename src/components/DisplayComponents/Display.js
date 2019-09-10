@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Display = ({ value }) => {
-  return <section className='display'>{value}</section>;
+const Display = ({ values }) => {
+  return <section className='display'>{[...values]}</section>;
 };
 
 export default Display;
