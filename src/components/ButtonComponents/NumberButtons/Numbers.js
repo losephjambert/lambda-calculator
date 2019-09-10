@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NumberButton from './NumberButton';
 import { numbers } from '../../../data';
 //import any components needed
@@ -10,8 +10,7 @@ import { numbers } from '../../../data'
 
 const Numbers = ({ handleClick }) => {
   // STEP 2 - add the imported data to state
-  const [numberState, setNumberState] = useState(numbers);
-  return numberState.map(number => (
+  return numbers.map(number => (
     <div key={number} className={`btn-cell __${number}__`}>
       <NumberButton number={number} onClick={handleClick} />
     </div>

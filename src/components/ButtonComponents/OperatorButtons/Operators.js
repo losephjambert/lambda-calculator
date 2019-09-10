@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import OperatorButton from './OperatorButton';
 import { operators } from '../../../data';
 
@@ -8,8 +8,7 @@ import { operators } from '../../../data';
 
 const Operators = () => {
   // STEP 2 - add the imported data to state
-  const [operatorState, setOperatorState] = useState(operators);
-  return operatorState.map((operators, key) => (
+  return operators.map((operators, key) => (
     <div key={key} className={`btn-cell`}>
       <OperatorButton operators={operators} />
     </div>

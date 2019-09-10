@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SpecialButton from './SpecialButton';
 import { specials } from '../../../data';
 
@@ -8,8 +8,7 @@ import { specials } from '../../../data';
 
 const Specials = () => {
   // STEP 2 - add the imported data to state
-  const [specialState, setSpecialState] = useState(specials);
-  return specialState.map((special, key) => (
+  return specials.map((special, key) => (
     <div key={key} className={`btn-cell`}>
       <SpecialButton special={special} />
     </div>
