@@ -5,6 +5,8 @@ import Operators from './components/ButtonComponents/OperatorButtons/Operators';
 import Specials from './components/ButtonComponents/SpecialButtons/Specials';
 import Display from './components/DisplayComponents/Display';
 
+import { operators } from './data';
+
 // STEP 4 - import the button and display components
 // Don't forget to import any extra css/scss files you build into the correct component
 
@@ -19,15 +21,36 @@ function App() {
   // Don't forget to pass the functions (and any additional data needed) to the components as props
 
   const [total, setTotal] = useState(0);
-  const [values, setValues] = useState([0]); // always have the operation array start with a 0 in case the user starts the operation with an operator and not a number
+  const [values, setValues] = useState(['0']); // always have the operation array start with a 0 in case the user starts the operation with an operator and not a number
   const calculateTotal = arr => {
     // takes an array operation and returns a total result from the operation in the array.
+    console.log('calculateTotal', arr);
+    const multipliedAndDividedArray = [];
+    const total = 0;
+    // loop through arr once to do multiplication and division
+    arr.forEach(item => {
+      const leftHand = [];
+      const rightHand = [];
+      let operator = null;
+      if (item === '*' || item === '/') {
+        operator = item;
+      } else if (item !== '+' && item !== '-') {
+        operator === null ? leftHand.push(item) : rightHand.push(item);
+      }
+    });
+    // store that arr in a var
+
+    // loop through the new array and do addition and subtraction
+    // return total
   };
-  const handleClick = value => {
-    console.log('click', value);
-    setValues([...values, value]);
+  const isOperator = (operators, value) => operators.filter(o => o.value === value).length > 0;
+  const handleValue = value => {
+    if (value === 'C') setValues(['0']);
+    else if (value === '=') calculateTotal(values);
+    else if (values[values.length - 1] === value && isOperator(operators, value)) console.log(`don't add that value`);
+    else setValues([...values, value]);
   };
-  console.log(values);
+
   return (
     <div className='container'>
       <Logo />
@@ -36,13 +59,13 @@ function App() {
         <Display values={values.slice(1)} />
         <section className='buttons-container'>
           <section className='specials'>
-            <Specials handleClick={handleClick} />
+            <Specials handleValue={handleValue} />
           </section>
           <section className='numbers'>
-            <Numbers handleClick={handleClick} />
+            <Numbers handleValue={handleValue} />
           </section>
           <section className='operators'>
-            <Operators handleClick={handleClick} />
+            <Operators handleValue={handleValue} />
           </section>
         </section>
       </div>
