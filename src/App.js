@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Numbers from './components/ButtonComponents/NumberButtons/Numbers';
 import Operators from './components/ButtonComponents/OperatorButtons/Operators';
@@ -18,6 +18,14 @@ function App() {
   // the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
   // Don't forget to pass the functions (and any additional data needed) to the components as props
 
+  const [total, setTotal] = useState(0);
+  const [operation, setOperation] = useState([0]); // always have the operation array start with a 0 in case the user starts the operation with an operator and not a number
+  const calculateTotal = arr => {
+    // takes an array operation and returns a total result from the operation in the array.
+  };
+  const handleClick = e => {
+    console.log('click');
+  };
   return (
     <div className='container'>
       <Logo />
@@ -26,13 +34,13 @@ function App() {
         <Display value={0} />
         <section className='buttons-container'>
           <section className='specials'>
-            <Specials />
+            <Specials handleClick={handleClick} />
           </section>
           <section className='numbers'>
-            <Numbers />
+            <Numbers handleClick={handleClick} />
           </section>
           <section className='operators'>
-            <Operators />
+            <Operators handleClick={handleClick} />
           </section>
         </section>
       </div>
