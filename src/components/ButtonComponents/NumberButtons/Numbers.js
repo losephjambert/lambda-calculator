@@ -11,7 +11,11 @@ import { numbers } from '../../../data'
 const Numbers = () => {
   // STEP 2 - add the imported data to state
   const [numberState, setNumberState] = useState(numbers);
-  return numberState.map(number => <NumberButton key={number} number={number} />);
+  return numberState.map(number => (
+    <div className={`btn-cell __${number}__`}>
+      <NumberButton key={number} number={number} />
+    </div>
+  ));
 };
 
 export default Numbers;

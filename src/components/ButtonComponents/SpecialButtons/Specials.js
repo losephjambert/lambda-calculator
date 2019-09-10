@@ -9,7 +9,11 @@ import { specials } from '../../../data';
 const Specials = () => {
   // STEP 2 - add the imported data to state
   const [specialState, setSpecialState] = useState(specials);
-  return specialState.map((special, key) => <SpecialButton key={key} special={special} />);
+  return specialState.map((special, key) => (
+    <div className={`btn-cell`}>
+      <SpecialButton key={key} special={special} />
+    </div>
+  ));
 };
 
 export default Specials;
