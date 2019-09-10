@@ -26,13 +26,13 @@
   border-radius: 50px;
   color: ghostwhite;
   background-color: black;
-  box-shadow: 0 0 5px 0 transparent;
+  box-shadow: 0 0 0 2px transparent;
   font-size: 3rem;
   overflow: hidden;
   transition: 200ms;
 }
 .display.isActive {
-  box-shadow: 0 0 5px 0 ghostwhite;
+  box-shadow: 0 0 0 2px ghostwhite;
 }
 .display::after {
   content: '';
@@ -74,7 +74,7 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 .specials button {
-  background-color: #225d9e;
+  /* background-color: #225d9e; */
 }
 .numbers {
   grid-column: 1 / 4;
@@ -83,7 +83,7 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 .numbers button {
-  background-color: #184379;
+  /* background-color: #184379; */
 }
 .operators {
   grid-column: 4;
@@ -91,15 +91,16 @@
   display: grid;
 }
 .operators button {
-  background-color: #237293;
+  /* background-color: #237293; */
 }
 
 /* Buttons */
 .btn {
+  background-color: transparent;
   border: none;
   outline: none;
   border-radius: 15px;
-  box-shadow: -3px 3px 0px -1px ghostwhite;
+  box-shadow: -3px 3px 0px -1px ghostwhite, 0 0 0 1px ghostwhite;
   font-size: 1.4rem;
   width: 10vmin;
   height: 10vmin;
