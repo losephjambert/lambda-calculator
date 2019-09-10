@@ -1,5 +1,5 @@
 .container {
-  background-color: #c00025;
+  background-color: black;
   width: 100%;
   max-width: 550px;
   border-radius: 15px;
@@ -24,10 +24,15 @@
   height: 12vmin;
   width: 100%;
   border-radius: 50px;
-  color: white;
-  background-color: #322c2d;
+  color: ghostwhite;
+  background-color: black;
+  box-shadow: 0 0 5px 0 transparent;
   font-size: 3rem;
   overflow: hidden;
+  transition: 200ms;
+}
+.display.isActive {
+  box-shadow: 0 0 5px 0 ghostwhite;
 }
 .display::after {
   content: '';
@@ -37,7 +42,7 @@
   left: 0;
   width: 100%;
   border-radius: 50px;
-  box-shadow: inset 12px 0 16px 0px #322c2d;
+  box-shadow: inset 12px 0 16px 0px black;
   background-color: transparent;
 }
 .display p {
@@ -93,8 +98,8 @@
 .btn {
   border: none;
   outline: none;
-  border-radius: 100%;
-  box-shadow: 0 2px 0 0 black;
+  border-radius: 15px;
+  box-shadow: -3px 3px 0px -1px ghostwhite;
   font-size: 1.4rem;
   width: 10vmin;
   height: 10vmin;
@@ -114,5 +119,4 @@
 }
 .btn.__number.__0 {
   width: 100%;
-  border-radius: 9999px;
 }

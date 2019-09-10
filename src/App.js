@@ -22,32 +22,33 @@ function App() {
 
   const [total, setTotal] = useState(0);
   const [values, setValues] = useState(['0']); // always have the operation array start with a 0 in case the user starts the operation with an operator and not a number
+  const add = (a, b) => a + b;
+  const subtract = (a, b) => a - b;
+  const multiple = (a, b) => a * b;
+  const divide = (a, b) => a / b;
   const calculateTotal = arr => {
-    // takes an array operation and returns a total result from the operation in the array.
     console.log('calculateTotal', arr);
-    const multipliedAndDividedArray = [];
-    const total = 0;
+    let total = 0;
+    const multipliedAndDivideArray = [];
+    // ideas
+    // takes an array operation and returns a total result from the operation in the array.
+
     // loop through arr once to do multiplication and division
+    // store that arr in a var
+    // loop through the new array and do addition and subtraction
+    const evalCrawl = (arr, operator) => {};
     arr.forEach(item => {
-      const leftHand = [];
-      const rightHand = [];
-      let operator = null;
       if (item === '*' || item === '/') {
-        operator = item;
-      } else if (item !== '+' && item !== '-') {
-        operator === null ? leftHand.push(item) : rightHand.push(item);
       }
     });
-    // store that arr in a var
 
-    // loop through the new array and do addition and subtraction
-    // return total
+    return total;
   };
   const isOperator = (operators, value) => operators.filter(o => o.value === value).length > 0;
   const handleValue = value => {
     if (value === 'C') setValues(['0']);
     else if (value === '=') calculateTotal(values);
-    else if (values[values.length - 1] === value && isOperator(operators, value)) console.log(`don't add that value`);
+    else if (values[values.length - 1] === value && isOperator(operators, value)) return;
     else setValues([...values, value]);
   };
 
