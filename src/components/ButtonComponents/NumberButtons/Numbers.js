@@ -12,8 +12,8 @@ const Numbers = ({ handleClick }) => {
   // STEP 2 - add the imported data to state
   const [numberState, setNumberState] = useState(numbers);
   return numberState.map(number => (
-    <div className={`btn-cell __${number}__`}>
-      <NumberButton key={number} number={number} onClick={handleClick} />
+    <div key={number} className={`btn-cell __${number}__`}>
+      <NumberButton number={number} onClick={handleClick} />
     </div>
   ));
 };

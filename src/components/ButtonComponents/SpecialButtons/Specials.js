@@ -10,8 +10,8 @@ const Specials = () => {
   // STEP 2 - add the imported data to state
   const [specialState, setSpecialState] = useState(specials);
   return specialState.map((special, key) => (
-    <div className={`btn-cell`}>
-      <SpecialButton key={key} special={special} />
+    <div key={key} className={`btn-cell`}>
+      <SpecialButton special={special} />
     </div>
   ));
 };
