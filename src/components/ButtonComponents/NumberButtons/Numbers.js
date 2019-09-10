@@ -8,11 +8,11 @@ import { numbers } from '../../../data'
 */
 //Import your array data to from the provided data file
 
-const Numbers = ({ handleClick }) => {
+const Numbers = ({ handleValue }) => {
   // STEP 2 - add the imported data to state
   return numbers.map(number => (
     <div key={number} className={`btn-cell __${number}__`}>
-      <NumberButton number={number} onClick={handleClick} />
+      <NumberButton number={number} onClick={handleValue} />
     </div>
   ));
 };
