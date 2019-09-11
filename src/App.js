@@ -22,13 +22,12 @@ function App() {
 
   const [total, setTotal] = useState(0);
   const [values, setValues] = useState([]);
-  const add = (a, b) => a + b;
-  const subtract = (a, b) => a - b;
+
   const multiply = (a, b) => a * b;
   const divide = (a, b) => a / b;
+
   const calculateTotal = arr => {
-    let total = 0;
-    const multipliedAndDivideArray = arr.slice(0);
+    const inputArrCopy = arr.slice(0);
     const evalCrawl = (arr, start, mathCB) => {
       let left = [];
       let right = [];
@@ -48,26 +47,37 @@ function App() {
       }
       left = left.reverse().join('');
       right = right.join('');
-      console.log(left, right);
       return [spliceStart, spliceEnd, mathCB(left * 1, right * 1)];
     };
     // handle multiplication and division
-    multipliedAndDivideArray.forEach((item, i) => {
+    inputArrCopy.forEach((item, i) => {
       if (item === '*' || item === '/') {
-        const [start, end, value] = evalCrawl(multipliedAndDivideArray, i, item === '*' ? multiply : divide);
-        multipliedAndDivideArray.splice(start, end, value);
+        const [start, end, value] = evalCrawl(inputArrCopy, i, item === '*' ? multiply : divide);
+        inputArrCopy.splice(start, end, value);
       }
     });
-    console.log(multipliedAndDivideArray);
-
-    return total;
+    // convert numbers to +/-
+    inputArrCopy.forEach((item, i) => {
+      if (!isNaN(item)) inputArrCopy[i] *= 1;
+      if (item === '-') {
+        inputArrCopy[i + 1] *= -1;
+        inputArrCopy.splice(i, 1);
+      }
+      if (item === '+') inputArrCopy.splice(i, 1);
+    });
+    // reduce the remaining array by adding the values together with a reduce
+    return inputArrCopy.reduce((a, b) => a + b, 0);
   };
+
   const isOperator = (operators, value) => operators.filter(o => o.value === value).length > 0;
+
   const handleValue = value => {
+    let total = 0;
     if (value === 'C') setValues([]);
-    else if (value === '=') calculateTotal(values);
+    else if (value === '=') total = calculateTotal(values);
     else if (values[values.length - 1] === value && isOperator(operators, value)) return;
     else setValues([...values, value]);
+    console.log('total: ', total);
   };
 
   return (
