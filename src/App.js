@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import './App.css';
-import Numbers from './components/ButtonComponents/NumberButtons/Numbers';
-import Operators from './components/ButtonComponents/OperatorButtons/Operators';
-import Specials from './components/ButtonComponents/SpecialButtons/Specials';
-import Display from './components/DisplayComponents/Display';
+import React, { useState } from "react";
+import "./App.css";
+import Numbers from "./components/ButtonComponents/NumberButtons/Numbers";
+import Operators from "./components/ButtonComponents/OperatorButtons/Operators";
+import Specials from "./components/ButtonComponents/SpecialButtons/Specials";
+import Display from "./components/DisplayComponents/Display";
 
-import { operators } from './data';
+import { operators } from "./data";
 
 // STEP 4 - import the button and display components
 // Don't forget to import any extra css/scss files you build into the correct component
 
 // Logo has already been provided for you. Do the same for the remaining components
-import Logo from './components/DisplayComponents/Logo';
+import Logo from "./components/DisplayComponents/Logo";
 
 function App() {
   // STEP 5 - After you get the components displaying using the provided data file, write your state hooks here.
@@ -21,51 +21,72 @@ function App() {
   // Don't forget to pass the functions (and any additional data needed) to the components as props
 
   const [total, setTotal] = useState(0);
-  const [values, setValues] = useState(['0']); // always have the operation array start with a 0 in case the user starts the operation with an operator and not a number
+  const [values, setValues] = useState([]); // always have the operation array start with a 0 in case the user starts the operation with an operator and not a number
   const add = (a, b) => a + b;
   const subtract = (a, b) => a - b;
-  const multiple = (a, b) => a * b;
+  const multiply = (a, b) => a * b;
   const divide = (a, b) => a / b;
   const calculateTotal = arr => {
-    console.log('calculateTotal', arr);
     let total = 0;
     const multipliedAndDivideArray = [];
-    // ideas
-    // takes an array operation and returns a total result from the operation in the array.
-
-    // loop through arr once to do multiplication and division
-    // store that arr in a var
-    // loop through the new array and do addition and subtraction
-    const evalCrawl = (arr, operator) => {};
-    arr.forEach(item => {
-      if (item === '*' || item === '/') {
+    const evalCrawl = (arr, operator, start) => {
+      let left = [];
+      let right = [];
+      for (let i = start - 1; i >= 0; i--) {
+        if (!isNaN(arr[i] * 1)) {
+          left.push(arr[i]);
+        } else break;
+      }
+      for (let i = start + 1; i < arr.length; i++) {
+        if (!isNaN(arr[i] * 1)) {
+          right.push(arr[i]);
+        } else break;
+      }
+      left = left.reverse().join("");
+      right = right.join("");
+      console.log(left, right);
+      return operator === "*"
+        ? multiply(left * 1, right * 1)
+        : divide(left * 1, right * 1);
+    };
+    arr.forEach((item, i) => {
+      if (item === "*" || item === "/") {
+        multipliedAndDivideArray.push(evalCrawl(arr, item, i));
+      } else {
+        multipliedAndDivideArray.push(item);
       }
     });
+    console.log(multipliedAndDivideArray);
 
     return total;
   };
-  const isOperator = (operators, value) => operators.filter(o => o.value === value).length > 0;
+  const isOperator = (operators, value) =>
+    operators.filter(o => o.value === value).length > 0;
   const handleValue = value => {
-    if (value === 'C') setValues(['0']);
-    else if (value === '=') calculateTotal(values);
-    else if (values[values.length - 1] === value && isOperator(operators, value)) return;
+    if (value === "C") setValues([]);
+    else if (value === "=") calculateTotal(values);
+    else if (
+      values[values.length - 1] === value &&
+      isOperator(operators, value)
+    )
+      return;
     else setValues([...values, value]);
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <Logo />
-      <div className='App'>
+      <div className="App">
         {/* STEP 4 - Render your components here and be sure to properly import/export all files */}
-        <Display values={values.slice(1)} />
-        <section className='buttons-container'>
-          <section className='specials'>
+        <Display values={values} />
+        <section className="buttons-container">
+          <section className="specials">
             <Specials handleValue={handleValue} />
           </section>
-          <section className='numbers'>
+          <section className="numbers">
             <Numbers handleValue={handleValue} />
           </section>
-          <section className='operators'>
+          <section className="operators">
             <Operators handleValue={handleValue} />
           </section>
         </section>
