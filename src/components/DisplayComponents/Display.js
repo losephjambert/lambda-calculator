@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Display = ({ values }) => {
+const Display = ({ values, total }) => {
+  let display = total || [...values];
   return (
     <section className={`display ${values.length > 0 ? 'isActive' : ''}`}>
-      <p>{[...values]}</p>
+      <p>{display}</p>
     </section>
   );
 };

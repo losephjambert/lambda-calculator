@@ -20,7 +20,7 @@ function App() {
   // the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
   // Don't forget to pass the functions (and any additional data needed) to the components as props
 
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState();
   const [values, setValues] = useState([0]);
   const [prevEntries, setPrevEntries] = useState([]);
 
@@ -81,6 +81,8 @@ function App() {
   const handleValue = value => {
     if (value === 'C') {
       setValues([0]);
+      setTotal();
+      console.log(total);
     } else if (value === '=') {
       calculateTotal(values);
     } else if (isOperator(operators, values[values.length - 1]) && isOperator(operators, value)) {
@@ -88,6 +90,7 @@ function App() {
       valuesCopy.pop();
       setValues([...valuesCopy, value]);
     } else if (values[0] === 0) setValues([value]);
+    else if (value === '.' && values.includes(value)) return;
     else setValues([...values, value]);
   };
   console.log(values, total);
@@ -98,7 +101,7 @@ function App() {
       <Logo />
       <div className='App'>
         {/* STEP 4 - Render your components here and be sure to properly import/export all files */}
-        <Display values={values} />
+        <Display values={values} total={total} />
         <section className='buttons-container'>
           <section className='specials'>
             <Specials handleValue={handleValue} />
