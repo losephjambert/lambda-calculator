@@ -53,20 +53,22 @@ function App() {
     inputArrCopy.forEach((item, i) => {
       if (item === '*' || item === '/') {
         const [start, end, value] = evalCrawl(inputArrCopy, i, item === '*' ? multiply : divide);
+        console.log('multiply or divide');
         inputArrCopy.splice(start, end, value);
       }
     });
     // convert numbers to +/-
     inputArrCopy.forEach((item, i) => {
-      if (!isNaN(item)) inputArrCopy[i] *= 1;
-      if (item === '-') {
+      console.log(item);
+      if (item === '+') inputArrCopy.splice(i, 1);
+      else if (item === '-') {
         inputArrCopy[i + 1] *= -1;
         inputArrCopy.splice(i, 1);
       }
-      if (item === '+') inputArrCopy.splice(i, 1);
     });
+    console.log(inputArrCopy);
     // reduce the remaining array by adding the values together with a reduce
-    return inputArrCopy.reduce((a, b) => a + b, 0);
+    return inputArrCopy.reduce((a, b) => a * 1 + b * 1, 0);
   };
 
   const isOperator = (operators, value) => operators.filter(o => o.value === value).length > 0;
