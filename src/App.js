@@ -21,7 +21,10 @@ function App() {
   // Don't forget to pass the functions (and any additional data needed) to the components as props
 
   const [total, setTotal] = useState(0);
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState([0]);
+  const [prevEntries, setPrevEntries] = useState([]);
+
+  console.log('total', total);
 
   const multiply = (a, b) => a * b;
   const divide = (a, b) => a / b;
@@ -42,7 +45,7 @@ function App() {
       for (let i = start + 1; i < arr.length; i++) {
         if (!isNaN(arr[i] * 1)) {
           right.push(arr[i]);
-          spliceEnd = i - 1;
+          spliceEnd = i + 1;
         } else break;
       }
       left = left.reverse().join('');
@@ -53,13 +56,12 @@ function App() {
     inputArrCopy.forEach((item, i) => {
       if (item === '*' || item === '/') {
         const [start, end, value] = evalCrawl(inputArrCopy, i, item === '*' ? multiply : divide);
-        console.log('multiply or divide');
+        console.log('multiply or divide', start, end, value);
         inputArrCopy.splice(start, end, value);
       }
     });
     // convert numbers to +/-
     inputArrCopy.forEach((item, i) => {
-      console.log(item);
       if (item === '+') inputArrCopy.splice(i, 1);
       else if (item === '-') {
         inputArrCopy[i + 1] *= -1;
@@ -68,19 +70,28 @@ function App() {
     });
     console.log(inputArrCopy);
     // reduce the remaining array by adding the values together with a reduce
-    return inputArrCopy.reduce((a, b) => a * 1 + b * 1, 0);
+    const res = inputArrCopy.reduce((a, b) => a * 1 + b * 1, 0);
+    // set the total and add the calculation to the prevEntries array
+    setTotal(res);
+    setPrevEntries([...prevEntries, { values: values, total: res }]);
   };
 
   const isOperator = (operators, value) => operators.filter(o => o.value === value).length > 0;
 
   const handleValue = value => {
-    let total = 0;
-    if (value === 'C') setValues([]);
-    else if (value === '=') total = calculateTotal(values);
-    else if (values[values.length - 1] === value && isOperator(operators, value)) return;
+    if (value === 'C') {
+      setValues([0]);
+    } else if (value === '=') {
+      calculateTotal(values);
+    } else if (isOperator(operators, values[values.length - 1]) && isOperator(operators, value)) {
+      let valuesCopy = values;
+      valuesCopy.pop();
+      setValues([...valuesCopy, value]);
+    } else if (values[0] === 0) setValues([value]);
     else setValues([...values, value]);
-    console.log('total: ', total);
   };
+  console.log(values, total);
+  console.log(prevEntries);
 
   return (
     <div className='container'>
