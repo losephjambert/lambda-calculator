@@ -1,5 +1,11 @@
-import React from "react";
+import React from 'react';
 
-const Display = () => {
-  return <div className="display">{/* Display any props data here */}</div>;
+const Display = ({ values }) => {
+  return (
+    <section className={`display ${values.length > 0 ? 'isActive' : ''}`}>
+      <p>{[...values]}</p>
+    </section>
+  );
 };
+
+export default Display;

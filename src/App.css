@@ -1,22 +1,123 @@
 .container {
-    background-color: #c00025;
-    width: 100%;
-    max-width: 550px;
-    border-radius: 15px;
-    border: 2px solid grey;
-    padding-bottom: 25px;
+  background-color: black;
+  width: 100%;
+  max-width: 550px;
+  border-radius: 15px;
+  border: 2px solid grey;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  margin-right: auto;
 }
 .display {
-    margin-top: 25px;
-    height: 100px;
-    width: 450px;
-    border-radius: 50px;
-    color: white;
-    background-color: #322c2d;
-    box-shadow: 1px 1px #322c2d;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding-right: 8%;
-    font-size: 5.0rem;
-  }
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 25px 0;
+  padding: 0 4vmin;
+  padding-bottom: 7px;
+  height: 12vmin;
+  width: 100%;
+  border-radius: 50px;
+  color: ghostwhite;
+  background-color: black;
+  box-shadow: 0 0 0 2px transparent;
+  font-size: 3rem;
+  overflow: hidden;
+  transition: 200ms;
+}
+.display.isActive {
+  box-shadow: 0 0 0 2px ghostwhite;
+}
+.display::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 50px;
+  box-shadow: inset 12px 0 16px 0px black;
+  background-color: transparent;
+}
+.display p {
+  max-width: 394px;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+/* Button Layout */
+.buttons-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 100%;
+  row-gap: 2vmin;
+  column-gap: 2vmin;
+}
+
+.specials,
+.numbers,
+.operators {
+  column-gap: inherit;
+  row-gap: inherit;
+}
+.specials {
+  grid-column: 1 / 4;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.specials button {
+  /* background-color: #225d9e; */
+}
+.numbers {
+  grid-column: 1 / 4;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.numbers button {
+  /* background-color: #184379; */
+}
+.operators {
+  grid-column: 4;
+  grid-row: 1 / 3;
+  display: grid;
+}
+.operators button {
+  /* background-color: #237293; */
+}
+
+/* Buttons */
+.btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  box-shadow: -3px 3px 0px -1px ghostwhite, 0 0 0 1px ghostwhite;
+  font-size: 1.4rem;
+  width: 10vmin;
+  height: 10vmin;
+  color: ghostwhite;
+}
+.btn:hover {
+  cursor: pointer;
+}
+.btn-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* specific styling for the 0 */
+.btn-cell.__0__ {
+  grid-column: 1 / 3;
+}
+.btn.__number.__0 {
+  width: 100%;
+}
